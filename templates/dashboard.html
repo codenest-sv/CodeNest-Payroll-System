@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  .stat-card {
+    border-radius: 12px;
+    color: white;
+    padding: 18px;
+    transition: transform 0.2s ease;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+  }
+  .bg-1 { background: linear-gradient(135deg, #4e73df, #224abe); }
+  .bg-2 { background: linear-gradient(135deg, #1cc88a, #0f9d68); }
+  .bg-3 { background: linear-gradient(135deg, #36b9cc, #258fa3); }
+  .bg-4 { background: linear-gradient(135deg, #f6c23e, #c49c2b); }
+  .bg-5 { background: linear-gradient(135deg, #e74a3b, #b93a2d); }
+  .bg-6 { background: linear-gradient(135deg, #858796, #60626d); }
+  .bg-7 { background: linear-gradient(135deg, #20c997, #159d74); }
+  .bg-8 { background: linear-gradient(135deg, #6f42c1, #5936a5); }
+</style>
+
+<div class="row g-3">
+
+  <!-- STAT CARDS ROW 1 -->
+  <div class="col-md-3">
+    <div class="stat-card bg-1 shadow-sm">
+      <small>Total Employees</small>
+      <h3 class="mt-2">{{ total_employees }}</h3>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="stat-card bg-2 shadow-sm">
+      <small>Total Payroll Records</small>
+      <h3 class="mt-2">{{ total_payroll_records }}</h3>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="stat-card bg-3 shadow-sm">
+      <small>Paid This Month</small>
+      <h3 class="mt-2">${{ "%.2f"|format(total_paid_this_month) }}</h3>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="stat-card bg-4 shadow-sm">
+      <small>Average Salary</small>
+      <h3 class="mt-2">${{ "%.2f"|format(avg_salary) }}</h3>
+    </div>
+  </div>
+
+  <!-- STAT CARDS ROW 2 -->
+  <div class="col-md-3">
+    <div class="stat-card bg-5 shadow-sm">
+      <small>Total Gross</small>
+      <h4 class="mt-2">${{ "%.2f"|format(total_gross) }}</h4>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="stat-card bg-6 shadow-sm">
+      <small>Total Net</small>
+      <h4 class="mt-2">${{ "%.2f"|format(total_net) }}</h4>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="stat-card bg-7 shadow-sm">
+      <small>Total Tax Collected</small>
+      <h4 class="mt-2">${{ "%.2f"|format(total_tax) }}</h4>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="stat-card bg-8 shadow-sm">
+      <small>Admins</small>
+      <h4 class="mt-2">{{ num_admins }}</h4>
+      <small>Budget: ${{ "{:,.2f}".format(company_budget) }}</small><br>
+      <strong>Remaining: ${{ "{:,.2f}".format(budget_remaining) }}</strong>
+    </div>
+  </div>
+
+  <!-- LEFT SIDE: CHART + TABLE -->
+  <div class="col-md-8">
+    <div class="card shadow-sm p-3">
+      <h6 class="fw-bold">Payroll - Last 6 Months</h6>
+      <canvas id="payrollChart" height="140"></canvas>
+    </div>
+
+    <div class="card shadow-sm p-3 mt-3">
+      <h6 class="fw-bold mb-3">Recent Payrolls</h6>
+      {% if recent_records|length == 0 %}
+        <div class="alert alert-info">No payroll records yet.</div>
+      {% else %}
+      <div class="table-responsive">
+        <table class="table table-hover table-sm">
+          <thead class="table-dark">
+            <tr>
+              <th>#</th>
+              <th>Employee</th>
+              <th>Gross</th>
+              <th>Tax</th>
+              <th>Net</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in recent_records %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ r.employee_name }}</td>
+              <td>${{ "%.2f"|format(r.gross_pay|float) }}</td>
+              <td>${{ "%.2f"|format(r.tax|float) }}</td>
+              <td>${{ "%.2f"|format(r.net_pay|float) }}</td>
+              <td>{{ r.date }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE: TOP EMPLOYEES + ACTIONS -->
+  <div class="col-md-4">
+    <div class="card shadow-sm p-3">
+      <h6 class="fw-bold">Top Employees</h6>
+      <ul class="list-group list-group-flush">
+        {% for name, count in top_emps %}
+        <li class="list-group-item d-flex justify-content-between">
+          {{ name }}
+          <span class="badge bg-primary rounded-pill">{{ count }}</span>
+        </li>
+        {% endfor %}
+        {% if top_emps|length == 0 %}
+          <li class="list-group-item">No payrolls yet</li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div class="card shadow-sm p-3 mt-3">
+      <h6 class="fw-bold">Quick Actions</h6>
+      <a href="{{ url_for('admin.employees') }}" class="btn btn-success w-100 mb-2">Manage Employees</a>
+      <a href="{{ url_for('payroll.process_payroll') }}" class="btn btn-info w-100 mb-2">Process Payroll</a>
+      <a href="{{ url_for('admin.payroll_history') }}" class="btn btn-dark w-100">Payroll History</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const labels = {{ chart_labels | tojson | safe }};
+  const values = {{ chart_values | tojson | safe }};
+
+  const ctx = document.getElementById('payrollChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Net Paid',
+        data: values,
+        backgroundColor: 'rgba(33,150,243,0.7)',
+        borderColor: 'rgba(33,150,243,1)',
+        borderWidth: 1
+      }]
+    },
+    options: { 
+      responsive: true, 
+      maintainAspectRatio: false 
+    }
+  });
+</script>
+
+{% endblock %}

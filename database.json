@@ -1,0 +1,50 @@
+{
+    "admins": [
+        {
+            "username": "admin",
+            "password": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9"
+        },
+        {
+            "username": "Racca",
+            "password": "13cac5b2206e355bb69d78c6c6cccf399d1bb82db0166bd1039d72529aabe74b"
+        }
+    ],
+    "employees": [
+        {
+            "name": "Racca Zahnmie",
+            "department": "IT",
+            "salary": 200.0,
+            "id": 1
+        },
+        {
+            "name": "J. Philip Sleh",
+            "department": "Student Affairs",
+            "salary": 300.0,
+            "id": 2
+        },
+        {
+            "name": "Jessica N. Younge",
+            "department": "Finance",
+            "salary": 350.0,
+            "id": 3
+        },
+        {
+            "name": "Richard Trueh",
+            "department": "Internal Audit",
+            "salary": 400.0,
+            "id": 4
+        }
+    ],
+    "payroll": [
+        {
+            "id": 1,
+            "employee_name": "Richard Trueh",
+            "days_worked": 20,
+            "rate": 20.0,
+            "gross_pay": 400.0,
+            "tax": 20.0,
+            "net_pay": 380.0,
+            "date": "2025-11-16"
+        }
+    ]
+}

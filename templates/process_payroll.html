@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">Process Payroll</h2>
+
+<form method="POST">
+
+    <!-- EMPLOYEE SELECT -->
+    <div class="mb-3">
+        <label>Select Employee</label>
+        <select class="form-control" name="employee" id="employee_select" required>
+            <option value="">-- Select Employee --</option>
+            {% for e in employees %}
+                <option value="{{ e.id }}" data-salary="{{ e.salary }}">
+                    {{ e.name }} ({{ e.department }})
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- SALARY -->
+    <div class="mb-3">
+        <label>Monthly Salary ($)</label>
+        <input type="text" class="form-control" id="salary" name="salary" readonly>
+    </div>
+
+    <!-- DAYS WORKED -->
+    <div class="mb-3">
+        <label>Days Worked</label>
+        <input type="number" class="form-control" name="days_worked" id="days_worked" min="1" max="31" required>
+    </div>
+
+    <hr>
+
+    <!-- CALCULATION OUTPUT -->
+    <div class="mb-3">
+        <label>Daily Rate ($)</label>
+        <input type="text" id="daily_rate" class="form-control" readonly>
+    </div>
+
+    <div class="mb-3">
+        <label>Gross Pay ($)</label>
+        <input type="text" id="gross_pay" class="form-control" readonly>
+    </div>
+
+    <div class="mb-3">
+        <label>Tax (5%) ($)</label>
+        <input type="text" id="tax" class="form-control" readonly>
+    </div>
+
+    <div class="mb-3">
+        <label>Net Pay ($)</label>
+        <input type="text" id="net_pay" class="form-control" readonly>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Payroll</button>
+
+</form>
+
+<script>
+
+// When employee is selected → load salary
+document.getElementById("employee_select").addEventListener("change", function () {
+    let salary = this.options[this.selectedIndex].getAttribute("data-salary") || 0;
+    document.getElementById("salary").value = salary;
+    calculate();
+});
+
+// When days worked changes → recalc everything
+document.getElementById("days_worked").addEventListener("input", calculate);
+
+function calculate() {
+    let salary = parseFloat(document.getElementById("salary").value) || 0;
+    let days = parseFloat(document.getElementById("days_worked").value) || 0;
+
+    let daily = salary / 30;
+    let gross = daily * days;
+    let tax = gross * 0.05;
+    let net = gross - tax;
+
+    document.getElementById("daily_rate").value = daily.toFixed(2);
+    document.getElementById("gross_pay").value = gross.toFixed(2);
+    document.getElementById("tax").value = tax.toFixed(2);
+    document.getElementById("net_pay").value = net.toFixed(2);
+}
+
+</script>
+
+{% endblock %}

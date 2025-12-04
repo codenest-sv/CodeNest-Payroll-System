@@ -1,0 +1,104 @@
+{
+    "admins": [
+        {
+            "username": "admin",
+            "password": "scrypt:32768:8:1$FCQ8HLWfvrKITn9N$630ce5d3d84afce46588291b0591d414771d0f9a6ef8cab67009bcf03fc05316c862aef11863317fca78b02f0e57c4e841779e983d652c300d48caeee317b710",
+            "role": "admin"
+        },
+        {
+            "username": "Princeton",
+            "password": "scrypt:32768:8:1$M3akfeJsOVEkF4kl$f5aa4d3d0c0f19866f93d21ab62dccf8e2443de2ca1af8f95038f85b2603818464496348a23cc2986d3c4a0424c1020cb627c45d3b24fcf6730e278950d4cf5b",
+            "role": "admin"
+        }
+    ],
+    "employees": [
+        {
+            "name": "Princeton R. Zahnmie",
+            "department": "Computer Science",
+            "salary": 500.0,
+            "id": 1
+        },
+        {
+            "name": "J. Philip Sleh",
+            "department": "Internal Audit",
+            "salary": 600.0,
+            "id": 2
+        },
+        {
+            "name": "Jessica N. Younge",
+            "department": "Finance",
+            "salary": 550.0,
+            "id": 3
+        },
+        {
+            "name": "Richard Trueh",
+            "department": "Student Affairs",
+            "salary": 575.0,
+            "id": 4
+        },
+        {
+            "name": "Oliver D.S. Toe",
+            "department": "IT",
+            "salary": 450.0,
+            "id": 5
+        },
+        {
+            "name": "Paul Flomo",
+            "department": "Media and Publicity",
+            "salary": 400.0,
+            "id": 6
+        },
+        {
+            "name": "Christina Brooks",
+            "department": "Staff",
+            "salary": 350.0,
+            "id": 7
+        }
+    ],
+    "payroll": [
+        {
+            "employee_id": 1,
+            "employee_name": "Princeton R. Zahnmie",
+            "days_worked": 31,
+            "rate": 25.0,
+            "gross_pay": 775.0,
+            "tax": 38.75,
+            "net_pay": 736.25,
+            "date": "2025-11-17",
+            "id": 1
+        },
+        {
+            "employee_id": 5,
+            "employee_name": "Oliver D.S. Toe",
+            "days_worked": 30,
+            "rate": 30.0,
+            "gross_pay": 900.0,
+            "tax": 45.0,
+            "net_pay": 855.0,
+            "date": "2025-11-19",
+            "id": 2
+        },
+        {
+            "employee_id": 5,
+            "employee_name": "Oliver D.S. Toe",
+            "days_worked": 30,
+            "rate": 30.0,
+            "gross_pay": 900.0,
+            "tax": 45.0,
+            "net_pay": 855.0,
+            "date": "2025-11-19",
+            "id": 3
+        },
+        {
+            "employee_id": 6,
+            "employee_name": "Paul Flomo",
+            "days_worked": 10,
+            "rate": 900.0,
+            "gross_pay": 9000.0,
+            "tax": 450.0,
+            "net_pay": 8550.0,
+            "date": "2025-11-28",
+            "id": 4
+        }
+    ]
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(120deg, #d39ab8, #8aa7cf, #6b87c4);
+            background-size: cover;
+            font-family: "Segoe UI", Arial;
+        }
+
+        .login-box {
+            width: 380px;
+            padding: 40px 30px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(22px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+            position: relative;
+            text-align: center;
+        }
+
+        /* Circle User Icon */
+        .user-circle {
+            width: 95px;
+            height: 95px;
+            background: #0b2b55;
+            border-radius: 50%;
+            position: absolute;
+            top: -48px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-circle i {
+            color: white;
+            font-size: 45px;
+        }
+
+        /* Input fields */
+        .input-container {
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .input-row {
+            display: flex;
+            align-items: center;
+            background: #2b4860;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 18px;
+        }
+
+        .input-row i {
+            color: white;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .input-row input {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: white;
+            font-size: 15px;
+        }
+
+        ::placeholder {
+            color: #d9e2ef;
+        }
+
+        /* Remember + Forgot */
+        .bottom-options {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 2px 20px;
+            font-size: 13px;
+            color: #2d3b52;
+        }
+
+        .bottom-options a {
+            color: #2d3b52;
+            text-decoration: none;
+        }
+
+        /* Login Button */
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 25px;
+            border: none;
+            background: #1c2e49;
+            color: white;
+            font-size: 15px;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: #22395b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <div class="user-circle">
+            <i>👤</i>
+        </div>
+
+        <form method="POST" autocomplete="off">
+            <div class="input-container">
+                
+                <div class="input-row">
+                    <i>👤</i>
+                    <input type="text" name="username" placeholder="Email ID">
+                </div>
+
+                <div class="input-row">
+                    <i>🔒</i>
+                    <input type="password" name="password" placeholder="Password">
+                </div>
+
+            </div>
+
+            <div class="bottom-options">
+                <label><input type="checkbox"> Remember me</label>
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button class="login-btn" type="submit">LOGIN</button>
+        </form>
+
+    </div>
+
+</body>
+</html>

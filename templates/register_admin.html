@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card p-3 shadow-sm">
+      <h5>Create Admin</h5>
+
+      <!-- Show only if current user is SUPER ADMIN -->
+      {% if session.role == 'super_admin' %}
+
+      <form method="POST">
+        <div class="mb-2">
+          <input name="username" class="form-control" placeholder="Username" required>
+        </div>
+
+        <div class="mb-2">
+          <input type="password" name="password" class="form-control" placeholder="Password" required>
+        </div>
+
+        <div class="mb-2">
+          <select name="role" class="form-control" required>
+            <option value="admin">Admin</option>
+            <option value="viewer">Viewer</option>
+          </select>
+        </div>
+
+        <button class="btn btn-success">Create Admin</button>
+      </form>
+
+      {% else %}
+      <p class="text-danger mt-3">Only Super Admin can create new admins.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

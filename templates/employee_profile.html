@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h4 class="fw-bold mb-3">Employee Profile</h4>
+
+<div class="row g-3">
+
+  <div class="col-md-4">
+    <div class="card shadow-sm p-3 text-center">
+      <h5 class="fw-bold">{{ emp.name }}</h5>
+      <p class="text-muted">{{ emp.department }}</p>
+      <p class="fw-bold">Salary: ${{ "%.2f"|format(emp.salary) }}</p>
+      <a href="{{ url_for('admin.edit_employee', id=emp.id) }}" class="btn btn-primary">
+    Edit Employee
+</a>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card shadow-sm p-3">
+      <h6 class="fw-bold mb-3">Payroll History</h6>
+
+      {% if payroll|length == 0 %}
+        <div class="alert alert-info">No payroll records.</div>
+      {% else %}
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th>#</th>
+              <th>Days</th>
+              <th>Gross</th>
+              <th>Tax</th>
+              <th>Net</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in payroll %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ p.days_worked }}</td>
+              <td>${{ "%.2f"|format(p.gross_pay) }}</td>
+              <td>${{ "%.2f"|format(p.tax) }}</td>
+              <td>${{ "%.2f"|format(p.net_pay) }}</td>
+              <td>{{ p.date }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

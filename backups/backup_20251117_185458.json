@@ -1,0 +1,65 @@
+{
+    "admins": [
+        {
+            "username": "admin",
+            "password": "scrypt:32768:8:1$FCQ8HLWfvrKITn9N$630ce5d3d84afce46588291b0591d414771d0f9a6ef8cab67009bcf03fc05316c862aef11863317fca78b02f0e57c4e841779e983d652c300d48caeee317b710"
+        }
+    ],
+    "employees": [
+        {
+            "name": "Princeton R. Zahnmie",
+            "department": "Computer Science",
+            "salary": 500.0,
+            "id": 1
+        },
+        {
+            "name": "J. Philip Sleh",
+            "department": "Internal Audit",
+            "salary": 600.0,
+            "id": 2
+        },
+        {
+            "name": "Jessica N. Younge",
+            "department": "Finance",
+            "salary": 550.0,
+            "id": 3
+        },
+        {
+            "name": "Richard Trueh",
+            "department": "Student Affairs",
+            "salary": 575.0,
+            "id": 4
+        },
+        {
+            "name": "Oliver D.S. Toe",
+            "department": "IT",
+            "salary": 450.0,
+            "id": 5
+        },
+        {
+            "name": "Paul Flomo",
+            "department": "Media and Publicity",
+            "salary": 400.0,
+            "id": 6
+        },
+        {
+            "name": "Christina Brooks",
+            "department": "Staff",
+            "salary": 350.0,
+            "id": 7
+        }
+    ],
+    "payroll": [
+        {
+            "employee_id": 1,
+            "employee_name": "Princeton R. Zahnmie",
+            "days_worked": 31,
+            "rate": 25.0,
+            "gross_pay": 775.0,
+            "tax": 38.75,
+            "net_pay": 736.25,
+            "date": "2025-11-17",
+            "id": 1
+        }
+    ]
+}
